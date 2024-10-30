@@ -1,6 +1,5 @@
 package com.example.calculadora_loca
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,18 +16,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -41,9 +37,9 @@ import androidx.compose.ui.unit.sp
 @Composable
 @Preview
 fun Calculadora_disenio(){
-    var x  by remember { mutableStateOf(0.0)}
-    var y by remember { mutableStateOf(0.0)}
-    var resultado by remember { mutableStateOf(0.0)}
+    var x  by remember { mutableDoubleStateOf(0.0)}
+    var y by remember { mutableDoubleStateOf(0.0)}
+    var resultado by remember { mutableDoubleStateOf(0.0)}
     var operacionSeleccionada by remember { mutableStateOf<(Double, Double) -> Double>({ a, b -> a }) }
     var operacionTexto by remember { mutableStateOf("") }
     var simboloOperacion by remember { mutableStateOf("") }
@@ -75,8 +71,8 @@ fun Calculadora_disenio(){
                 .padding(0.dp, 380.dp, 0.dp, 0.dp)
         ) {
             Column(Modifier.padding(20.dp, 0.dp, 0.dp, 0.dp)) {
-                boton_cal_num("1", 2.0) {
-                    cambiarvalor(
+                Boton_cal_num("1", 2.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -85,8 +81,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("4", 3.0) {
-                    cambiarvalor(
+                Boton_cal_num("4", 3.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -95,8 +91,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("7", 8.0) {
-                    cambiarvalor(
+                Boton_cal_num("7", 8.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -108,8 +104,8 @@ fun Calculadora_disenio(){
 
             }
             Column(Modifier.padding(10.dp, 0.dp, 0.dp, 20.dp)) {
-                boton_cal_num("2", 1.0) {
-                    cambiarvalor(
+                Boton_cal_num("2", 1.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -118,8 +114,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("0", 9.0) {
-                    cambiarvalor(
+                Boton_cal_num("0", 9.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -128,8 +124,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("8", 7.0) {
-                    cambiarvalor(
+                Boton_cal_num("8", 7.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -140,8 +136,8 @@ fun Calculadora_disenio(){
                 }
             }
             Column(Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)) {
-                boton_cal_num("3", 0.0) {
-                    cambiarvalor(
+                Boton_cal_num("3", 0.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -150,8 +146,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("6", 4.0) {
-                    cambiarvalor(
+                Boton_cal_num("6", 4.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -160,8 +156,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = !ctrlxy },
                         { mostrarResultado = false })
                 }
-                boton_cal_num("9", 6.0) {
-                    cambiarvalor(
+                Boton_cal_num("9", 6.0) {
+                    Cambiarvalor(
                         it,
                         ctrlxy,
                         { newX -> x = newX },
@@ -172,8 +168,8 @@ fun Calculadora_disenio(){
                 }
             }
             Column(Modifier.padding(23.dp, 0.dp, 0.dp, 0.dp)) {
-                boton_cal_ope("&", { a, b -> a + b }) {
-                    cambiaroperacion(
+                Boton_cal_ope("&", { a, b -> a + b }) {
+                    Cambiaroperacion(
                         it,
                         { operacionSeleccionada = it },
                         { operacionTexto += " +" },
@@ -181,8 +177,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = false },
                         { mostrarResultado = false })
                 }
-                boton_cal_ope("#", { a, b -> a - b }) {
-                    cambiaroperacion(
+                Boton_cal_ope("#", { a, b -> a - b }) {
+                    Cambiaroperacion(
                         it,
                         { operacionSeleccionada = it },
                         { operacionTexto += " -" },
@@ -191,8 +187,8 @@ fun Calculadora_disenio(){
                         { mostrarResultado = false })
                 }
 
-                boton_cal_ope("~", { a, b -> a * b }) {
-                    cambiaroperacion(
+                Boton_cal_ope("~", { a, b -> a * b }) {
+                    Cambiaroperacion(
                         it,
                         { operacionSeleccionada = it },
                         { operacionTexto += " *" },
@@ -200,8 +196,8 @@ fun Calculadora_disenio(){
                         { ctrlxy = false },
                         { mostrarResultado = false })
                 }
-                boton_cal_ope("¬", { a, b -> if (b != 0.0) a / b else 0.0 }) {
-                    cambiaroperacion(
+                Boton_cal_ope("¬", { a, b -> if (b != 0.0) a / b else 0.0 }) {
+                    Cambiaroperacion(
                         it,
                         { operacionSeleccionada = it },
                         { operacionTexto += " /" },
@@ -239,7 +235,7 @@ fun Calculadora_disenio(){
 
 
 
-fun cambiaroperacion(
+fun Cambiaroperacion(
     operacion: (Double, Double) -> Double,
     setOperacionSeleccionada: ((Double, Double) -> Double) -> Unit,
     setOperacionTexto: () -> Unit,
@@ -255,7 +251,7 @@ fun cambiaroperacion(
 }
 
 
-fun cambiarvalor( num: Double,
+fun Cambiarvalor( num: Double,
                   ctrlxy: Boolean,
                   setX: (Double) -> Unit,
                   setY: (Double) -> Unit,
@@ -277,7 +273,7 @@ fun cambiarvalor( num: Double,
 
 
 @Composable
-fun boton_cal_num(textoBoton: String, num: Double,numalclicar: (Double) -> Unit){
+fun Boton_cal_num(textoBoton: String, num: Double,numalclicar: (Double) -> Unit){
 
         OutlinedButton(
             onClick = {numalclicar(num)},
@@ -295,7 +291,7 @@ fun boton_cal_num(textoBoton: String, num: Double,numalclicar: (Double) -> Unit)
 }
 
 @Composable
-fun boton_cal_ope(
+fun Boton_cal_ope(
     textoBoton : String,
     operar: (Double, Double) -> Double,
     opealclicar: ((Double,Double) -> Double) -> Unit
